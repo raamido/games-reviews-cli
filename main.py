@@ -46,12 +46,15 @@ while True:
                 table.add_row(review.game_name, "⭐" *
                               review.rate, review.review)
             console.print(table)
-            Option = Prompt.ask("")
+            input("")
             reset_table()
             break
+
     elif Option == "2":
         break
+
     elif Option == "exit!":
         break
+
     else:
         continue
