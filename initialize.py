@@ -2,6 +2,8 @@ from sqlalchemy import create_engine, Column, String, Integer
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
+open('reviews.sqlite', 'x').close()
+
 engine = create_engine('sqlite:///reviews.sqlite', echo=False)
 
 session = sessionmaker(bind=engine)()
