@@ -10,6 +10,7 @@ console = Console()
 
 
 table = Table(show_header=True, header_style="bold magenta")
+table.add_column(" ")
 table.add_column("Game Name")
 table.add_column("Rate", justify="center")
 table.add_column("Review", justify="center")
@@ -25,6 +26,7 @@ def get_reviews():
 def reset_table():
     global table
     table = Table(show_header=True, header_style="bold magenta")
+    table.add_column(" ")
     table.add_column("Game Name")
     table.add_column("Rate", justify="center")
     table.add_column("Review", justify="center")
@@ -43,7 +45,7 @@ while True:
             console.clear()
             console.print(Panel(Text("Reviews", justify="center")))
             for review in get_reviews():
-                table.add_row(review.game_name, "⭐" *
+                table.add_row(str(review.id), review.game_name, "⭐" *
                               review.rate, review.review)
             console.print(table)
             input("")
