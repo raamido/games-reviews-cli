@@ -1,3 +1,4 @@
+import time
 from rich.console import Console
 from rich.panel import Panel
 from rich.text import Text
@@ -23,6 +24,12 @@ def get_reviews():
     return reviews
 
 
+def leave_review(game_name, rating, review):
+    record = Review(game_name=game_name, rate=rating, review=review)
+    session.add(record)
+    session.commit()
+
+
 def reset_table():
     global table
     table = Table(show_header=True, header_style="bold magenta")
@@ -31,6 +38,10 @@ def reset_table():
     table.add_column("Rate", justify="center")
     table.add_column("Review", justify="center")
 
+
+global game_name
+global rate
+global rev
 
 while True:
     console.clear()
@@ -53,7 +64,50 @@ while True:
             break
 
     elif Option == "2":
-        break
+        while True:
+            console.clear()
+            console.print(Panel(Text("Add Review", justify="center")))
+            while True:
+                game_name = Prompt.ask('Game Name')
+                if len(game_name) == 0:
+                    console.print("Game Name [red]CANNOT BE EMPTY![/red]")
+                    continue
+                elif len(game_name) < 2:
+                    console.print("Game Name Cannot Be less than 2 chars")
+                else:
+                    break
+
+            while True:
+                rate = Prompt.ask('Rating')
+                if not rate.isdigit():
+                    console.print("rating must be a number")
+                    continue
+                elif int(rate) > 5 and int(rate) < 0:
+                    console.print("rating must be a number between 0 and 5")
+                    continue
+                else:
+                    break
+
+            while True:
+                rev = Prompt.ask('Type Your review')
+                if len(rev) < 2 and len(rev) > 999:
+                    console.print(
+                        "review length must be between 2 and 999 chars")
+                    continue
+                else:
+                    break
+            leave_review(game_name, rate, rev)
+            print("[green]Review Added![/green]")
+            time.sleep(3)
+            break
+
+    elif Option == "3":
+        console.clear()
+        console.print(Panel(Text("About", justify="center")))
+        console.print(
+            "Game Reviews, is a command line program designed and developed by Raamido!")
+        Prompt.ask("")
+        continue
 
     elif Option == "exit!":
         break
