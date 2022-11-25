@@ -98,7 +98,7 @@ while True:
                 else:
                     break
             leave_review(game_name, rate, rev)
-            print("[green]Review Added![/green]")
+            console.print("[green]Review Added![/green]")
             time.sleep(3)
             break
 
