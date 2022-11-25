@@ -74,6 +74,7 @@ while True:
                     continue
                 elif len(game_name) < 2:
                     console.print("Game Name Cannot Be less than 2 chars")
+                    continue
                 else:
                     break
 
